@@ -1,0 +1,213 @@
+/*html,body{
+  padding:0px;
+  margin:0px;
+  width:100%;
+  font-family: 'Lato', sans-serif;
+  font-weight:300;
+}*/
+
+
+h1{
+  margin:0px;
+  padding:0px;
+  font-weight:400;
+  text-transform:uppercase;
+  text-align:center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+h4{
+  margin: 0px;
+  padding: 0px;
+  font-weight: 100;
+  color: #FFF;
+  font-size: 18px;
+}
+
+
+
+ul  {
+  margin:0px;
+  padding:0px;
+}
+
+#menu_module{
+  font-family: 'Lato', sans-serif !important;
+
+}
+.menuwrap{
+
+  overflow:auto;
+  width:100%;
+  padding-left:10%;
+  padding-right:10%;
+}
+
+#Apps,#Entrees,#Desserts{
+  background-color:#FFF;
+  padding-bottom: 20px;
+
+}
+
+
+.menuitem{
+  background-color:#FFF;
+  width: 24.3%;
+  max-height: 150px;
+  float : left;
+  margin : 0.8%;
+  overflow: auto;
+  padding: 5px;
+  border-top : 5px solid #e74c3c;
+}
+
+.itemname{
+  float:left;
+  display:block;
+  text-transform:uppercase;
+  font-size: 16px;
+  font-weight:400;
+  width:80%;
+}
+
+.itemprice{
+  float:right;
+  font-weight:400;
+}
+
+
+.itemdesc{
+  display:block;
+  margin-top:15px;
+}
+
+.inputbox{
+  width:30%;
+  margin:auto;
+}
+
+.nameinput{
+  width:100%;
+}
+
+.priceinput{
+  width:100%;
+}
+
+.descinput{
+  width:100%;
+  margin-bottom: 10px;
+}
+
+
+
+.pumpkin-flat-button {
+  background: #e74c3c;
+   -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+
+  position: relative;
+  vertical-align: top;
+  width: 100%;
+  height: 30px;
+  padding: 0;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  cursor:pointer;
+  border: 0;
+  border-bottom: 2px solid #c54e00;
+  -webkit-box-shadow: inset 0 -2px #c54e00;
+  box-shadow: inset 0 -2px #c54e00;
+}
+
+.pumpkin-flat-button:hover{
+  background: #CC0000;
+}
+.pumpkin-flat-button:active{
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+
+.pumpkinbar{
+  background: #CC0000;
+  color:#fff;
+   -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+
+  position: relative;
+  vertical-align: top;
+  width: 90%;
+  height: 30px;
+  padding: 0;
+  font-size: 15px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  cursor:pointer;
+  border: 0;
+  margin-top: 5px;
+  overflow: auto;
+}
+
+
+.pumpkinbar:hover{
+  background: #fff;
+  color:#e74c3c;
+}
+.pumpkinbar:active{
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+
+#toggle_edit{
+  background: #CC0000;
+  color:#fff;
+   -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+
+  position: relative;
+  vertical-align: top;
+  width: 20%;
+  height: 30px;
+  padding: 0;
+  font-size: 15px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  cursor:pointer;
+  border: 0;
+  margin-top: 5px;
+}
+
+
+#toggle_edit:hover{
+  background: #fff;
+  color:#e74c3c;
+}
+#toggle_edit:active{
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

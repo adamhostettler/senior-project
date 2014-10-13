@@ -1,0 +1,377 @@
+<html ng-app="cms" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Proprietary Content Management System - Storefront Solutions and Cellaflora">
+<meta name="author" content="Adam Hostettler and Taeha Joo">
+<title>Shortwave alpha build v1.1</title>
+	<link rel="icon" type="image/png" href="img/sw.jpg">
+	<link rel="stylesheet" href="css/blitzer/jquery-ui-1.10.4.custom.css" />
+	<link rel="stylesheet" href="css/cms.css">
+
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script src="js/controllers.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/menu.css" />
+
+
+
+  <script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+  </script>
+</head>
+
+<body>
+
+<div>
+
+
+	<div id="preview_banner">You are currently previewing the website. Click below to edit content and modules.<br/>
+	<input type ="button" id="toggle_edit" value="Click to Edit!">
+	</div>
+
+	<!--=============================================================
+	toolbar to hide and show modules, with button to save to firebase
+	==============================================================-->
+	<form class="user_toolbar" ng-controller="layoutController">
+		<div>
+			<img src ="img/storefront.png" alt="logo" style="width:45%; margin-left:20%; display:block;"/><br/>
+			<h4>Select modules to display</h4><br/>
+			<!-- repeated content from firebase -->
+			<label ng-repeat="(name,value) in database" id="{{name}}_label" for="{{name}}">
+		    <input type="checkbox" id="{{name}}" name="{{name}}" value="{{value}}" attr-module="#{{name}}_module" ng-model="value">
+		    {{name}}<br/>
+			</label>
+			<!-- end repeated content from firebase -->
+		</div>
+
+		&nbsp;
+
+		<!-- begin module editing text boxes -->
+		<div ng-controller="contentController">
+
+			<a class="edit_button" data-edit="#header_line1" data-content="#header_line1tb">Website Title</a><br/>
+			<textarea id="header_line1tb" class="edit_textbox"></textarea><br/>
+
+
+			<a class="edit_button" data-edit="#header_line2" data-content="#header_line2tb">Hours</a><br/>
+			<textarea id="header_line2tb" class="edit_textbox"></textarea><br/>
+
+
+			<a class="edit_button" data-edit="#intro_title" data-content="#intro_titletb">Subheading</a><br/>
+			<textarea id="intro_titletb" class="edit_textbox"></textarea><br/>
+
+
+			<a class="edit_button" data-edit="#intro_desc" data-content="#intro_desctb">Intro</a><br/>
+			<textarea id="intro_desctb" rows="5" class="edit_textbox"></textarea><br/>
+
+			<a class="edit_button" data-edit="#footer_copy" data-content="#footer_copytb">Copyright</a><br/>
+			<textarea id="footer_copytb" rows="1" class="edit_textbox"></textarea><br/>
+
+			<a class="edit_button" data-edit="#footer_contact" data-content="#footer_contacttb">Contact</a><br/>
+			<textarea id="footer_contacttb" rows="2" class="edit_textbox"></textarea><br/>
+
+
+		</div>
+
+		<!-- button to save module list to firebase -->
+		<button type="submit" id="submit" ng-click="setModules()" class="pumpkinbar">Save Changes</button><br/>
+		<button id="close" class="pumpkinbar">Close Panel</button><br/>
+		<button type="submit" class="pumpkinbar" onclick= "window.location.href='index.html'">Sign Out</button>
+	</form>
+	<!--====== end user toolbar ==================-->
+
+	<!--=============================================================
+	begin created content, container
+	==============================================================-->
+	<div id="container" ng-controller="contentController">
+		<div id="inner_container">
+
+			<!-- header module -->
+			<div id="header_module">
+				<h1 id="header_line1"></h1>
+				<h2 id="header_line2"></h2>
+			</div><!-- end header -->
+
+			<!-- intro module -->
+			<div id="intro_module">
+				<h1 id="intro_title"></h1>
+				<p id="intro_desc"></p>
+			</div><!-- end intro -->
+
+			<!-- deals module -->
+			<div id="deals_module">
+				<h1>Daily Specials</h1>
+
+				<div id="tabs">
+					<ul>
+				    <li><a href="#tabs-1">Monday</a></li>
+				    <li><a href="#tabs-2">Tuesday</a></li>
+				    <li><a href="#tabs-3">Wednesday</a></li>
+				    <li><a href="#tabs-4">Thursday</a></li>
+				    <li><a href="#tabs-5">Friday</a></li>
+				    <li><a href="#tabs-6">Saturday</a></li>
+				    <li><a href="#tabs-7">Sunday</a></li>
+				  </ul>
+			    <div id="tabs-1">
+            <div ng-controller="MyControllerMon">
+              <ul ng-repeat="(key,nn) in level1">
+                <li>{{nn}}</li>
+                <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+              </ul>
+              <input type="text" ng-model="newDeal"/>
+              <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+            </div>
+			    </div>
+		      <div id="tabs-2">
+		        <div ng-controller="MyControllerTue">
+		          <ul ng-repeat="(key,nn) in level1">
+                <li>{{nn}}</li>
+                <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+              </ul>
+              <input type="text" ng-model="newDeal"/>
+              <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+            </div>
+		      </div>
+		      <div id="tabs-3">
+            <div ng-controller="MyControllerWed">
+              <ul ng-repeat="(key,nn) in level1">
+                <li>{{nn}}</li>
+                <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+              </ul>
+              <input type="text" ng-model="newDeal"/>
+              <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+            </div>
+		      </div>
+			  	<div id="tabs-4">
+		        <div ng-controller="MyControllerThr">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		            <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+		          </ul>
+		          <input type="text" ng-model="newDeal"/>
+		          <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+		        </div>
+			  	</div>
+			  	<div id="tabs-5">
+		        <div ng-controller="MyControllerFri">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		            <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+		          </ul>
+		          <input type="text" ng-model="newDeal"/>
+		          <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+		        </div>
+			  	</div>
+			  	<div id="tabs-6">
+						<div ng-controller="MyControllerSat">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		            <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+		          </ul>
+		          <input type="text" ng-model="newDeal"/>
+		          <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+		        </div>
+			  	</div>
+			  	<div id="tabs-7">
+						<div ng-controller="MyControllerSun">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		            <button class="deals_button" type="submit" ng-click="delPerson(key)">Delete</button>
+		          </ul>
+		          <input type="text" ng-model="newDeal"/>
+		          <button class="deals_button" type="submit" ng-click="addDeal()">Add New item</button>
+		        </div>
+			  	</div>
+				</div>
+			</div><!-- end deals -->
+
+			<!-- menu module -->
+			<div id="menu_module">
+				<div id="menu_break"></div>
+
+				<div id="Apps">
+				    <h1>Appetizers</h1>
+				          <div ng-controller="MyControllerApps">
+				            <div class="menuwrap">
+				              <ul ng-repeat="(key, Itemname) in level1">
+
+				                <div class="menuitem">
+				                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+				                  <br/>
+				                  <div class="itemdesc">
+				                  {{Itemname.Desc}}
+				                  </div>
+				                  <br/>
+				                  <button type="submit" ng-click="delPerson(Itemname.Itemname)" class="pumpkin-flat-button">Delete</button>
+				                </div>
+				              </ul>
+				            </div>
+				            <br/>
+				            <div class="inputbox">
+				              Item name : <input type="text" label="Name" ng-model="itemname" class="nameinput"/><br/>
+				              Price $: <input type="text" label="Price" ng-model="itemprice" class="priceinput"/><br/>
+				              Desc : <textarea label="Desc" ng-model="itemdesc" class="descinput" rows="5" cols="50"></textarea><br/>
+				              <button type="submit" ng-click="addDeal()" class="pumpkin-flat-button">Add New Appetizer</button>
+				            </div>
+				        </div>
+				  </div>
+
+				  <div id="Entrees">
+				    <h1>Entrees</h1>
+				          <div ng-controller="MyControllerEntrees">
+				            <div class="menuwrap">
+				              <ul ng-repeat="(key, Itemname) in level1">
+
+				                <div class="menuitem">
+				                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+				                  <br/>
+				                  <div class="itemdesc">
+				                  {{Itemname.Desc}}
+				                  </div>
+				                  <br/>
+				                  <button type="submit" ng-click="delPerson(Itemname.Itemname)" class="pumpkin-flat-button">Delete</button>
+				                </div>
+				              </ul>
+				            </div>
+				            <br/>
+				            <div class="inputbox">
+				              Item name : <input type="text" label="Name" ng-model="itemname" class="nameinput"/><br/>
+				              Price $: <input type="text" label="Price" ng-model="itemprice" class="priceinput"/><br/>
+				              Desc : <textarea label="Desc" ng-model="itemdesc" class="descinput" rows="5" cols="50"></textarea><br/>
+				              <button type="submit" ng-click="addDeal()" class="pumpkin-flat-button">Add New Entree</button>
+				            </div>
+				        </div>
+				  </div>
+
+				  <div id="Desserts">
+				    <h1>Desserts</h1>
+				          <div ng-controller="MyControllerDesserts">
+				            <div class="menuwrap">
+				              <ul ng-repeat="(key, Itemname) in level1">
+
+				                <div class="menuitem">
+				                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+				                  <br/>
+				                  <div class="itemdesc">
+				                  {{Itemname.Desc}}
+				                  </div>
+				                  <br/>
+				                  <button type="submit" ng-click="delPerson(Itemname.Itemname)" class="pumpkin-flat-button">Delete</button>
+				                </div>
+				              </ul>
+				            </div>
+				            <br/>
+				            <div class="inputbox">
+				              Item name : <input type="text" label="Name" ng-model="itemname" class="nameinput"/><br/>
+				              Price $: <input type="text" label="Price" ng-model="itemprice" class="priceinput"/><br/>
+				              Desc : <textarea label="Desc" ng-model="itemdesc" class="descinput" rows="5" cols="50"></textarea><br/>
+				              <button type="submit" ng-click="addDeal()" class="pumpkin-flat-button">Add New Dessert</button>
+				            </div>
+				        </div>
+				</div>
+
+
+
+
+				<!--<div id="menu_break"></div>
+				<div id="menu_image"></div>-->
+			</div><!-- end menu -->
+
+			<!-- social module -->
+			<div id="social_module">
+				social
+			</div><!-- end social -->
+
+			<!-- footer module -->
+			<div id="footer_module">
+				<p id="footer_copy">&copy; copyright information goes here</p>
+				<p id="footer_contact">along with any contact, phone, address, etc</p>
+				<p>2014 All rights reserved, Storefront Solutions/Cellaflora</p>
+			</div><!-- end footer -->
+
+		</div>
+	</div>
+	<!--====== end content, container ===================-->
+
+</div>
+
+</body>
+<script>
+
+function display(){
+	e = document.getElementById('container');
+	e.style.display = 'block';
+	$('input[type="checkbox"]').each(function(){
+		if(this.checked){
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","block");
+		} else {
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","none");
+		}
+	});
+
+	$('.edit_textbox').each(function(){
+		var model = $(this).attr("data-model");
+		$(this).attr("ng-model", model);
+	});
+}
+setTimeout("display()", 1500);
+
+$('.user_toolbar').on('change', ':checkbox', function(){
+	$('input[type="checkbox"]').each(function(){
+		if(this.checked){
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","block");
+		} else {
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","none");
+		}
+	});
+	var social_check = document.getElementById('social').checked;
+	if(social_check == true){
+		$('#twitter').css("display","inline-block");
+		$('#facebook').css("display","inline-block");
+		$('#googlep').css("display","inline-block");
+
+		$('#twitter_label').css("display","inline-block");
+		$('#facebook_label').css("display","inline-block");
+		$('#googlep_label').css("display","inline-block");
+	} else {
+		$('#twitter').css("display","none");
+		$('#facebook').css("display","none");
+		$('#googlep').css("display","none");
+
+		$('#twitter_label').css("display","none");
+		$('#facebook_label').css("display","none");
+		$('#googlep_label').css("display","none");
+	}
+});
+
+$('#toggle_edit').click(function(){
+	$('.user_toolbar').animate({left: "80%"},700, "easeOutBounce");
+	$('#preview_banner').animate({top: "-100px"},700);
+});
+
+$('#close').click(function(){
+	$('.user_toolbar').animate({left: "100%"},700, "easeOutBounce");
+	$('#preview_banner').animate({top: "0px"},700);
+});
+
+$('.edit_button').click(function(){
+	var elemToEdit = $(this).attr('data-edit');
+	var elemToEditContent = $(this).attr('data-content');
+	var newElemContent = $(elemToEditContent).val();
+	$(elemToEdit).html(newElemContent);
+});
+
+</script>
+
+</html>

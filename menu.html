@@ -1,0 +1,111 @@
+<html ng-app="myapp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Angularfire Tech</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.6/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    
+
+    <script src="js/controllermenu.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/blitzer/jquery-ui-1.10.4.custom.css" />
+
+
+
+</head>
+
+<body>
+
+
+  <div id="Apps">
+    <h1>Appetizers</h1>
+          <div ng-controller="MyControllerApps">
+            <div class="menuwrap">
+              <ul ng-repeat="(key, Itemname) in level1">
+
+                <div class="menuitem">
+                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+                  <br/>
+                  <div class="itemdesc">
+                  {{Itemname.Desc}}
+                  </div>
+                  <br/>
+                  <button type="submit" ng-click="delPerson(Itemname.Itemname)" class="pumpkin-flat-button">Delete</button>
+                </div>
+              </ul>
+            </div>
+            <br/>
+            <div class="inputbox">
+              Item name : <input type="text" label="Name" ng-model="itemname" class="nameinput"/><br/>
+              Price : <input type="text" label="Price" ng-model="itemprice" class="priceinput"/><br/>
+              Desc : <textarea label="Desc" ng-model="itemdesc" class="descinput" rows="5" cols="50"></textarea><br/>
+              <button type="submit" ng-click="addDeal()" class="pumpkin-flat-button">Add New Appetizer</button>
+            </div>
+        </div>
+  </div>
+
+  <div id="Entrees">
+    <h1>Entrees</h1>
+          <div ng-controller="MyControllerEntrees">
+            <div class="menuwrap">
+              <ul ng-repeat="(key, Itemname) in level1">
+
+                <div class="menuitem">
+                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+                  <br/>
+                  <div class="itemdesc">
+                  {{Itemname.Desc}}
+                  </div>
+                  <br/>
+                  <button type="submit" ng-click="delPerson(Itemname.Itemname)" class="pumpkin-flat-button">Delete</button>
+                </div>
+              </ul>
+            </div>
+            <br/>
+            <div class="inputbox">
+              Item name : <input type="text" label="Name" ng-model="itemname" class="nameinput"/><br/>
+              Price : <input type="text" label="Price" ng-model="itemprice" class="priceinput"/><br/>
+              Desc : <textarea label="Desc" ng-model="itemdesc" class="descinput" rows="5" cols="50"></textarea><br/>
+              <button type="submit" ng-click="addDeal()" class="pumpkin-flat-button">Add New Entree</button>
+            </div>
+        </div>
+  </div>
+
+  <div id="Desserts">
+    <h1>Desserts</h1>
+          <div ng-controller="MyControllerDesserts">
+            <div class="menuwrap">
+              <ul ng-repeat="(key, Itemname) in level1">
+
+                <div class="menuitem">
+                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+                  <br/>
+                  <div class="itemdesc">
+                  {{Itemname.Desc}}
+                  </div>
+                  <br/>
+                  <button type="submit" ng-click="delPerson(Itemname.Itemname)" class="pumpkin-flat-button">Delete</button>
+                </div>
+              </ul>
+            </div>
+            <br/>
+            <div class="inputbox">
+              Item name : <input type="text" label="Name" ng-model="itemname" class="nameinput"/><br/>
+              Price : <input type="text" label="Price" ng-model="itemprice" class="priceinput"/><br/>
+              Desc : <textarea label="Desc" ng-model="itemdesc" class="descinput" rows="5" cols="50"></textarea><br/>
+              <button type="submit" ng-click="addDeal()" class="pumpkin-flat-button">Add New Dessert</button>
+            </div>
+        </div>
+  </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<html ng-app="cms" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Proprietary Content Management System - Storefront Solutions and Cellaflora">
+<meta name="author" content="Adam Hostettler and Taeha Joo">
+<title>411 Test site</title>
+<link rel="icon" type="image/png" href="img/sw.jpg">
+	<link rel="stylesheet" href="css/blitzer/jquery-ui-1.10.4.custom.css" />
+	<link rel="stylesheet" href="css/cms.css">
+
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+  <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script src="js/consumerControllers.js"></script>
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/menu.css" />
+
+  <script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+  </script>
+</head>
+
+<body>
+
+<div>
+	<!--=============================================================
+	toolbar to hide and show modules, with button to save to firebase
+	==============================================================-->
+	<form class="user_toolbar" ng-controller="layoutController">
+
+		<div style="visibility:hidden;">
+			<!-- repeated content from firebase -->
+			<label ng-repeat="(name,value) in database" id="{{name}}_label" for="{{name}}">
+		    <input type="checkbox" id="{{name}}" name="{{name}}" value="{{value}}" attr-module="#{{name}}_module" ng-model="value" disabled>
+		    {{name}}
+			</label>
+			<!-- end repeated content from firebase -->
+		</div>
+
+	</form>
+
+
+	<!--=============================================================
+	begin content - consumer site
+	==============================================================-->
+	<div id="container" ng-controller="contentController">
+		<div id="inner_container">
+
+			<!-- header module -->
+			<div id="header_module">
+				<h1 id="header_line1"></h1>
+				<h2 id="header_line2"></h2>
+			</div><!-- end header -->
+
+			<!-- intro module -->
+			<div id="intro_module">
+				<h1 id="intro_title"></h1>
+				<p id="intro_desc"></p>
+			</div><!-- end intro -->
+
+			<!-- deals module -->
+			<div id="deals_module">
+				<h1>Daily Specials</h1>
+				<div id="tabs">
+					<ul>
+				    <li><a href="#tabs-1">Monday</a></li>
+				    <li><a href="#tabs-2">Tuesday</a></li>
+				    <li><a href="#tabs-3">Wednesday</a></li>
+				    <li><a href="#tabs-4">Thursday</a></li>
+				    <li><a href="#tabs-5">Friday</a></li>
+				    <li><a href="#tabs-6">Saturday</a></li>
+				    <li><a href="#tabs-7">Sunday</a></li>
+				  </ul>
+			    <div id="tabs-1">
+            <div ng-controller="MyControllerMon">
+              <ul ng-repeat="(key,nn) in level1">
+                <li>{{nn}}</li>
+              </ul>
+            </div>
+			    </div>
+		      <div id="tabs-2">
+		        <div ng-controller="MyControllerTue">
+		          <ul ng-repeat="(key,nn) in level1">
+                <li>{{nn}}</li>
+              </ul>
+            </div>
+		      </div>
+		      <div id="tabs-3">
+            <div ng-controller="MyControllerWed">
+              <ul ng-repeat="(key,nn) in level1">
+                <li>{{nn}}</li>
+              </ul>
+            </div>
+		      </div>
+			  	<div id="tabs-4">
+		        <div ng-controller="MyControllerThr">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		          </ul>
+		        </div>
+			  	</div>
+			  	<div id="tabs-5">
+		        <div ng-controller="MyControllerFri">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		          </ul>
+		        </div>
+			  	</div>
+			  	<div id="tabs-6">
+						<div ng-controller="MyControllerSat">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		          </ul>
+		        </div>
+			  	</div>
+			  	<div id="tabs-7">
+						<div ng-controller="MyControllerSun">
+		          <ul ng-repeat="(key,nn) in level1">
+		            <li>{{nn}}</li>
+		          </ul>
+		        </div>
+			  	</div>
+				</div>
+			</div><!-- end deals -->
+
+			<!-- menu module -->
+			<div id="menu_module">
+				<div id="menu_break"></div>
+
+				<div id="Apps">
+				    <h1>Appetizers</h1>
+				          <div ng-controller="MyControllerApps">
+				            <div class="menuwrap">
+				              <ul ng-repeat="(key, Itemname) in level1">
+
+				                <div class="menuitem">
+				                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+				                  <br/>
+				                  <div class="itemdesc">
+				                  {{Itemname.Desc}}
+				                  </div>
+				                  <br/>
+				                </div>
+				              </ul>
+				            </div>
+				            <br/>
+				        </div>
+				  </div>
+
+				  <div id="Entrees">
+				    <h1>Entrees</h1>
+				          <div ng-controller="MyControllerEntrees">
+				            <div class="menuwrap">
+				              <ul ng-repeat="(key, Itemname) in level1">
+
+				                <div class="menuitem">
+				                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+				                  <br/>
+				                  <div class="itemdesc">
+				                  {{Itemname.Desc}}
+				                  </div>
+				                  <br/>
+				                </div>
+				              </ul>
+				            </div>
+				            <br/>
+				        </div>
+				  </div>
+
+				  <div id="Desserts">
+				    <h1>Desserts</h1>
+				          <div ng-controller="MyControllerDesserts">
+				            <div class="menuwrap">
+				              <ul ng-repeat="(key, Itemname) in level1">
+
+				                <div class="menuitem">
+				                  <div class="itemname">{{Itemname.Itemname}}</div><div class="itemprice">${{Itemname.Price}}</div>
+				                  <br/>
+				                  <div class="itemdesc">
+				                  {{Itemname.Desc}}
+				                  </div>
+				                  <br/>
+				                </div>
+				              </ul>
+				            </div>
+				            <br/>
+				        </div>
+				</div>
+
+
+
+
+				<!--<div id="menu_break"></div>
+				<div id="menu_image"></div>-->
+			</div><!-- end menu -->
+
+
+			<!-- social module -->
+			<div id="social_module">
+				social
+			</div><!-- end social -->
+
+			<!-- footer module -->
+			<div id="footer_module">
+				<p>2014 All rights reserved, Storefront Solutions/Cellaflora</p>
+			</div><!-- end footer -->
+
+		</div>
+	</div>
+	<!--====== end content, container ===================-->
+
+</div>
+
+</body>
+<script>
+
+function display(){
+	e = document.getElementById('container');
+	e.style.display = 'block';
+	$('input[type="checkbox"]').each(function(){
+		if(this.checked){
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","block");
+		} else {
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","none");
+		}
+	});
+
+	$('.edit_textbox').each(function(){
+		var model = $(this).attr("data-model");
+		$(this).attr("ng-model", model);
+	});
+}
+setTimeout("display()", 1500);
+
+$('.user_toolbar').on('change', ':checkbox', function(){
+	$('input[type="checkbox"]').each(function(){
+		if(this.checked){
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","block");
+		} else {
+			$elem = $(this).attr('attr-module');
+			$($elem).css("display","none");
+		}
+	});
+	var social_check = document.getElementById('social').checked;
+	if(social_check == true){
+		$('#twitter').css("display","inline-block");
+		$('#facebook').css("display","inline-block");
+		$('#googlep').css("display","inline-block");
+
+		$('#twitter_label').css("display","inline-block");
+		$('#facebook_label').css("display","inline-block");
+		$('#googlep_label').css("display","inline-block");
+	} else {
+		$('#twitter').css("display","none");
+		$('#facebook').css("display","none");
+		$('#googlep').css("display","none");
+
+		$('#twitter_label').css("display","none");
+		$('#facebook_label').css("display","none");
+		$('#googlep_label').css("display","none");
+	}
+});
+
+</script>
+
+</html>

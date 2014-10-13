@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Shortwave Login</title>
+<link rel="icon" type="image/png" href="img/sw.jpg">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+</head>
+
+
+
+
+<body ng-app="app" ng-cloak>
+
+    <div class="container">
+      <div id="title">
+        <img src ="img/storefront.png" style="width: 30%; margin:auto; display:block;"/>
+      	<h1>Welcome to Shortwave</h1>
+        <h2>Login or create an account</h2>
+      </div>
+      <form id="auth" ng-controller="AuthCtrl">
+        <fieldset ng-hide="auth.user">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="email" ng-model="email" />
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="password" ng-model="password" />
+          </div>
+
+          <button type="submit" class="pumpkin-flat-button" ng-click="signIn()">Sign In</button><br/>
+
+          <button type="submit" class="pumpkin-flat-button" onclick="location.href='create.html'">Or create a new account</button><br/>
+        </fieldset>
+        <span ng-show="auth.user">
+          {{auth.user.name}}
+          <button type="submit" class="pumpkin-flat-button" ng-click="auth.$logout()">Sign Out</button>
+        </span>
+      </form>
+      <p id="signed_in_as" class="navbar-text navbar-right" ng-show="auth.user">Signed in as {{auth.user.email}}</p>
+    </div>
+
+  <div class="container" ng-controller="AlertCtrl">
+    <div class="alert alert-{{alert.class}}" ng-model="alert.message" ng-show="alert.message">
+      {{alert.message}}
+    </div>
+  </div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.min.js"></script>
+<script src="https://cdn.firebase.com/v0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+<script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+<script type="text/javascript" src="js/controllerlogin.js"></script>
+
+
+</html>
